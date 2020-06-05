@@ -21,11 +21,23 @@ public class Main {
         piggyBank.forEach(m -> System.out.println(m));
         System.out.println();
 
-        double bank = 0;
+        Bank bank = new Bank(0);
         for (int i = 0; i < piggyBank.size(); i++ ) {
-            bank += piggyBank.get(i).getTotal();
+            bank.add(piggyBank.get(i).getTotal());
         }
+        
         NumberFormat formatter = new DecimalFormat("$#0.00");
-        System.out.println("The piggy bank holds "+ formatter.format(bank));
+        System.out.println("The piggy bank holds "+ formatter.format(bank.getValue()));
+
+        double remove = 1.5;
+        System.out.println("Removing "+ formatter.format(remove)+ " from piggy bank");
+        if (remove <= bank.getValue()){
+            bank.subtract(remove);
+            System.out.println("The piggy bank holds "+ formatter.format(bank.getValue()));
+        }else {
+            System.out.println("The piggy bank doesn't have enough money to remove. Max value to remove: " + formatter.format(bank.getValue()));
+        }
+
+        
     }
 }
